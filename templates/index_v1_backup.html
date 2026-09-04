@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoJack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div id="game">
+
+    <!-- MASA -->
+    <img id="table-bg"
+         src="{{ url_for('static', filename='assets/table/masa.png') }}"
+         alt="Blackjack Table">
+
+    <!-- ÜST BİLGİLER -->
+    <div id="balance">BAKİYE: $200</div>
+
+    <div id="zero-counter">
+        X 0
+    </div>
+
+    <div id="music-status">
+        MÜZİK: AÇIK
+    </div>
+
+    <!-- BAŞLIKLAR -->
+    <div id="dealer-title">KURPİYER</div>
+    <div id="player-title">SEN</div>
+
+    <!-- KURPİYER SKORU -->
+    <div id="dealer-score"></div>
+
+    <!-- KURPİYER KARTLARI -->
+    <div id="dealer-cards" class="cards"></div>
+
+    <!-- OYUNCU SKORU -->
+    <div id="player-score"></div>
+
+    <!-- OYUNCU KARTLARI -->
+    <div id="player-cards" class="cards"></div>
+
+    <!-- SOL BUTONLAR -->
+    <button id="double-btn" class="game-button">
+        2X
+    </button>
+
+    <button id="deal-btn" class="game-button">
+        DEAL
+    </button>
+
+    <!-- SAĞ BUTONLAR -->
+    <button id="stand-btn" class="game-button">
+        STAND
+    </button>
+
+    <button id="hit-btn" class="game-button">
+        HIT
+    </button>
+
+    <!-- BAHİS -->
+    <div id="bet">
+        BAHİS: $0
+    </div>
+
+    <!-- BAHİS CHİPLERİ -->
+    <div id="bet-chips"></div>
+
+    <!-- CHIPLER -->
+    <div id="chips">
+
+        <button class="chip-button" data-value="1">
+            <img src="{{ url_for('static', filename='assets/chips/1.png') }}">
+        </button>
+
+        <button class="chip-button" data-value="5">
+            <img src="{{ url_for('static', filename='assets/chips/5.png') }}">
+        </button>
+
+        <button class="chip-button" data-value="25">
+            <img src="{{ url_for('static', filename='assets/chips/25.png') }}">
+        </button>
+
+        <button class="chip-button" data-value="50">
+            <img src="{{ url_for('static', filename='assets/chips/50.png') }}">
+        </button>
+
+        <button class="chip-button" data-value="100">
+            <img src="{{ url_for('static', filename='assets/chips/100.png') }}">
+        </button>
+
+        <button class="chip-button" data-value="200">
+            <img src="{{ url_for('static', filename='assets/chips/200.png') }}">
+        </button>
+
+        <button class="chip-button" data-value="500">
+            <img src="{{ url_for('static', filename='assets/chips/500.png') }}">
+        </button>
+
+        <button class="chip-button" data-value="1000">
+            <img src="{{ url_for('static', filename='assets/chips/1000.png') }}">
+        </button>
+
+    </div>
+
+    <!-- SONUÇ -->
+    <div id="result"></div>
+
+    <!-- RESTART -->
+    <button id="restart-btn">
+        RESTART
+    </button>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+
+</body>
+</html>
