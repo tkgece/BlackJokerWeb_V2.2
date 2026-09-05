@@ -80,6 +80,247 @@ const gameElement =
 
 
 /* =========================================================
+   MOBİL / TAM EKRAN BUTONU
+   ========================================================= */
+
+let fullscreenBtn = null;
+
+
+/*
+   Katılımcı için lobide TAM EKRAN butonu oluşturulur.
+   Oda kurucusunda bu buton gösterilmez.
+*/
+function createFullscreenButton() {
+
+    if (fullscreenBtn) {
+        return;
+    }
+
+    fullscreenBtn =
+        document.createElement("button");
+
+    fullscreenBtn.type =
+        "button";
+
+    fullscreenBtn.id =
+        "mobile-fullscreen-btn";
+
+    fullscreenBtn.textContent =
+        "⛶ TAM EKRAN";
+
+    /*
+       CSS dosyasına bağımlı olmaması için
+       butonun görünümü burada tanımlanıyor.
+    */
+
+    fullscreenBtn.style.width =
+        "100%";
+
+    fullscreenBtn.style.height =
+        "52px";
+
+    fullscreenBtn.style.marginTop =
+        "12px";
+
+    fullscreenBtn.style.border =
+        "2px solid rgb(230,190,70)";
+
+    fullscreenBtn.style.borderRadius =
+        "10px";
+
+    fullscreenBtn.style.background =
+        "rgb(25,125,70)";
+
+    fullscreenBtn.style.color =
+        "white";
+
+    fullscreenBtn.style.fontSize =
+        "16px";
+
+    fullscreenBtn.style.fontWeight =
+        "bold";
+
+    fullscreenBtn.style.letterSpacing =
+        "1px";
+
+    fullscreenBtn.style.cursor =
+        "pointer";
+
+    fullscreenBtn.style.touchAction =
+        "manipulation";
+
+    fullscreenBtn.style.display =
+        "none";
+
+
+    fullscreenBtn.addEventListener(
+        "click",
+        async () => {
+
+            /*
+               Kullanıcı gerçekten butona bastığı için
+               tarayıcının fullscreen izni alma ihtimali
+               en yüksek olan yöntem budur.
+            */
+
+            try {
+
+                if (
+                    document.fullscreenElement
+                ) {
+
+                    if (
+                        document.exitFullscreen
+                    ) {
+
+                        await document.exitFullscreen();
+
+                    } else if (
+                        document.webkitExitFullscreen
+                    ) {
+
+                        document.webkitExitFullscreen();
+                    }
+
+                    return;
+                }
+
+
+                const element =
+                    document.documentElement;
+
+
+                if (
+                    element.requestFullscreen
+                ) {
+
+                    await element.requestFullscreen();
+
+                } else if (
+                    element.webkitRequestFullscreen
+                ) {
+
+                    element.webkitRequestFullscreen();
+
+                } else {
+
+                    alert(
+                        "Bu tarayıcı tam ekran özelliğini desteklemiyor."
+                    );
+
+                    return;
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Tam ekran açılamadı:",
+                    error
+                );
+            }
+        }
+    );
+
+
+    /*
+       room-info'nun hemen altına eklenir.
+       Böylece mevcut lobi düzeni bozulmaz.
+    */
+
+    if (roomInfo && roomInfo.parentElement) {
+
+        roomInfo.parentElement.appendChild(
+            fullscreenBtn
+        );
+    }
+}
+
+
+/*
+   Tam ekran butonunun görünürlüğünü kontrol eder.
+*/
+function updateFullscreenButton(isRoomOwner) {
+
+    createFullscreenButton();
+
+    if (!fullscreenBtn) {
+        return;
+    }
+
+    /*
+       Oda kurucusu:
+       TAM EKRAN butonu yok.
+    */
+
+    if (isRoomOwner) {
+
+        fullscreenBtn.style.display =
+            "none";
+
+        return;
+    }
+
+    /*
+       Katılımcı:
+       TAM EKRAN butonu görünür.
+    */
+
+    fullscreenBtn.style.display =
+        "block";
+}
+
+
+/*
+   Tarayıcı fullscreen durumunu takip eder.
+*/
+document.addEventListener(
+    "fullscreenchange",
+    () => {
+
+        if (!fullscreenBtn) {
+            return;
+        }
+
+        if (document.fullscreenElement) {
+
+            fullscreenBtn.textContent =
+                "⛶ TAM EKRANDAN ÇIK";
+
+        } else {
+
+            fullscreenBtn.textContent =
+                "⛶ TAM EKRAN";
+        }
+    }
+);
+
+
+/*
+   Safari / iOS eski fullscreen desteği.
+*/
+document.addEventListener(
+    "webkitfullscreenchange",
+    () => {
+
+        if (!fullscreenBtn) {
+            return;
+        }
+
+        if (document.webkitFullscreenElement) {
+
+            fullscreenBtn.textContent =
+                "⛶ TAM EKRANDAN ÇIK";
+
+        } else {
+
+            fullscreenBtn.textContent =
+                "⛶ TAM EKRAN";
+        }
+    }
+);
+
+
+/* =========================================================
    ODA KODU KOPYALA
    ========================================================= */
 
@@ -258,6 +499,13 @@ createRoomBtn.addEventListener(
             startGameBtn.style.display =
                 "none";
 
+            /*
+               Oda kurucusu olduğu için
+               TAM EKRAN butonu gizli.
+            */
+
+            updateFullscreenButton(true);
+
             startRoomPolling();
 
         } catch (error) {
@@ -409,6 +657,13 @@ joinConfirmBtn.addEventListener(
             startGameBtn.style.display =
                 "none";
 
+            /*
+               Katılımcı olduğu için
+               TAM EKRAN butonu gösterilir.
+            */
+
+            updateFullscreenButton(false);
+
             startRoomPolling();
 
         } catch (error) {
@@ -444,6 +699,17 @@ joinBackBtn.addEventListener(
 
         menuScreen.style.display =
             "block";
+
+        /*
+           Katılımcı geri döndüğünde
+           fullscreen butonu gizlenir.
+        */
+
+        if (fullscreenBtn) {
+
+            fullscreenBtn.style.display =
+                "none";
+        }
     }
 );
 
@@ -478,19 +744,31 @@ function updateRoomPlayers(players) {
             lobby.nickname === players[0]
         ) {
 
+            /*
+               BEN ODA KURUCUSUYUM
+            */
+
             startGameBtn.style.display =
                 "block";
 
             roomInfo.textContent =
                 "Oda hazır. Oyunu başlatabilirsin.";
 
+            updateFullscreenButton(true);
+
         } else {
+
+            /*
+               BEN KATILIMCIYIM
+            */
 
             startGameBtn.style.display =
                 "none";
 
             roomInfo.textContent =
                 "Oda sahibi oyunu başlatmayı bekliyor.";
+
+            updateFullscreenButton(false);
         }
 
     } else {
@@ -507,6 +785,23 @@ function updateRoomPlayers(players) {
 
         startGameBtn.style.display =
             "none";
+
+        /*
+           Katılımcı tek başına bekliyorsa
+           TAM EKRAN butonu yine açık kalabilir.
+        */
+
+        if (
+            lobby.nickname !==
+            players[0]
+        ) {
+
+            updateFullscreenButton(false);
+
+        } else {
+
+            updateFullscreenButton(true);
+        }
     }
 }
 
@@ -671,6 +966,17 @@ function enterGame() {
         );
 
         roomPolling = null;
+    }
+
+    /*
+       Oyun başladıktan sonra
+       lobi fullscreen butonu artık görünmez.
+    */
+
+    if (fullscreenBtn) {
+
+        fullscreenBtn.style.display =
+            "none";
     }
 
     lobbyElement.style.display =
@@ -1157,24 +1463,25 @@ function renderInfo() {
     }
 
     const mobileMusicButton =
-    document.getElementById(
-        "mobile-music-btn"
-    );
+        document.getElementById(
+            "mobile-music-btn"
+        );
 
-if (mobileMusicButton) {
+    if (mobileMusicButton) {
 
-    mobileMusicButton.textContent =
-        game.musicEnabled
-            ? "🔊"
-            : "🔇";
+        mobileMusicButton.textContent =
+            game.musicEnabled
+                ? "🔊"
+                : "🔇";
 
-    mobileMusicButton.setAttribute(
-        "aria-label",
-        game.musicEnabled
-            ? "Müziği kapat"
-            : "Müziği aç"
-    );
-}
+        mobileMusicButton.setAttribute(
+            "aria-label",
+            game.musicEnabled
+                ? "Müziği kapat"
+                : "Müziği aç"
+        );
+    }
+
     /*
        Eski zero counter artık kullanılmıyor.
        Varsa hedef bilgisini gösteriyoruz.
@@ -2217,6 +2524,7 @@ document.addEventListener(
     }
 );
 
+
 /* =========================================================
    MOBİL MÜZİK BUTONU
    ========================================================= */
@@ -2240,6 +2548,7 @@ if (mobileMusicBtn) {
         }
     );
 }
+
 
 /* =========================================================
    F11

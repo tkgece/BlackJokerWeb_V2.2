@@ -863,19 +863,32 @@ body {
     display: none;
 }
 
+
+/* =========================================================
+   MOBİL / TABLET - YATAY
+   ========================================================= */
+
 @media (max-width: 900px) and (orientation: landscape) {
 
+    /*
+       Oyunu telefon/tablet ekranının tamamına yay.
+       dvw / dvh dinamik viewport ölçülerini kullanır.
+       Fullscreen'e girildiğinde bunlar gerçek fullscreen
+       alanına göre hesaplanır.
+    */
     #game {
         transform:
-            scale(
-                min(
-                    calc(100vw / 1280),
-                    calc(100vh / 720)
-                )
-            );
+            scaleX(calc(100dvw / 1280))
+            scaleY(calc(100dvh / 720));
+
+        transform-origin: center center;
     }
 
-    /* Müzik */
+
+    /* =====================================================
+       MOBİL SES BUTONU
+       ===================================================== */
+
     #mobile-music-btn {
         display: flex;
 
@@ -903,18 +916,39 @@ body {
 
         z-index: 100;
 
+        cursor: pointer;
+
         touch-action: manipulation;
+
+        -webkit-tap-highlight-color: transparent;
     }
 
-    /* Butonlar */
+
+    /* =====================================================
+       OYUN BUTONLARI
+       ===================================================== */
+
     .game-button {
         touch-action: manipulation;
+
+        -webkit-tap-highlight-color: transparent;
     }
 
-    /* Lobby */
+    .chip-button,
+    .bet-chip {
+        touch-action: manipulation;
+
+        -webkit-tap-highlight-color: transparent;
+    }
+
+
+    /* =====================================================
+       LOBBY
+       ===================================================== */
+
     #lobby {
         width: min(92vw, 520px);
-        max-height: 92vh;
+        max-height: 92dvh;
 
         min-height: 0;
 
@@ -944,6 +978,10 @@ body {
         height: 52px;
         font-size: 16px;
         margin-top: 12px;
+
+        touch-action: manipulation;
+
+        -webkit-tap-highlight-color: transparent;
     }
 
     /* Oda kodu */
@@ -954,6 +992,19 @@ body {
 
     #copy-room-code-btn {
         min-height: 42px;
+
+        touch-action: manipulation;
+
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /*
+       Dinamik viewport değişimlerinde lobby'nin
+       ekran dışına taşmasını önle.
+    */
+    #room-screen {
+        max-height: calc(92dvh - 50px);
+        overflow-y: auto;
     }
 }
 
