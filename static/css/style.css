@@ -868,7 +868,7 @@ body {
    MOBÄ°L / TABLET - YATAY
    ========================================================= */
 
-@media (max-width: 1024px) and (orientation: landscape) {
+@media (orientation: landscape) and (pointer: coarse) {
 
     /*
        Oyunu telefon/tablet ekranÄ±nÄ±n tamamÄ±na yay.
@@ -1055,3 +1055,4 @@ body {
         font-weight: bold;
     }
 }
+
