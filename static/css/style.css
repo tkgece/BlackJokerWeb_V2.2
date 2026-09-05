@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    BOJACK
    LOBBY + 2 PLAYER
    ========================================================= */
@@ -356,7 +356,7 @@ body {
 
 
 /* =========================================================
-   ÃœST BÄ°LGÄ°
+   ÃƒÅ“ST BÃ„Â°LGÃ„Â°
    ========================================================= */
 
 #balance,
@@ -436,7 +436,7 @@ body {
 
 
 /* =========================================================
-   RAKÄ°P - ÃœST
+   RAKÃ„Â°P - ÃƒÅ“ST
    ========================================================= */
 
 #opponent-area {
@@ -673,7 +673,7 @@ body {
 
 
 /* =========================================================
-   BAHÄ°S
+   BAHÃ„Â°S
    ========================================================= */
 
 #bet {
@@ -695,7 +695,7 @@ body {
 
 
 /* =========================================================
-   BAHÄ°S Ã‡Ä°PLERÄ°
+   BAHÃ„Â°S Ãƒâ€¡Ã„Â°PLERÃ„Â°
    ========================================================= */
 
 #bet-chips {
@@ -779,7 +779,7 @@ body {
 
 
 /* =========================================================
-   SONUÃ‡
+   SONUÃƒâ€¡
    ========================================================= */
 
 #result {
@@ -865,28 +865,28 @@ body {
 
 
 /* =========================================================
-   MOBÄ°L / TABLET - YATAY
+   MOBÃ„Â°L / TABLET - YATAY
    ========================================================= */
 
 @media (orientation: landscape) and (pointer: coarse), (orientation: landscape) and (hover: none) {
 
     /*
-       Oyunu telefon/tablet ekranÄ±nÄ±n tamamÄ±na yay.
-       dvw / dvh dinamik viewport Ã¶lÃ§Ã¼lerini kullanÄ±r.
-       Fullscreen'e girildiÄŸinde bunlar gerÃ§ek fullscreen
-       alanÄ±na gÃ¶re hesaplanÄ±r.
+       Oyunu telefon/tablet ekranÃ„Â±nÃ„Â±n tamamÃ„Â±na yay.
+       dvw / dvh dinamik viewport ÃƒÂ¶lÃƒÂ§ÃƒÂ¼lerini kullanÃ„Â±r.
+       Fullscreen'e girildiÃ„Å¸inde bunlar gerÃƒÂ§ek fullscreen
+       alanÃ„Â±na gÃƒÂ¶re hesaplanÃ„Â±r.
     */
     #game {
         transform:
-            scaleX(calc(100dvw / 1280 * 0.40))
-            scaleY(calc(100dvh / 720 * 0.40));
+            scaleX(calc(100dvw / 1280))
+            scaleY(calc(100dvh / 720));
 
         transform-origin: center center;
     }
 
 
     /* =====================================================
-       MOBÄ°L SES BUTONU
+       MOBÃ„Â°L SES BUTONU
        ===================================================== */
 
     #mobile-music-btn {
@@ -999,8 +999,8 @@ body {
     }
 
     /*
-       Dinamik viewport deÄŸiÅŸimlerinde lobby'nin
-       ekran dÄ±ÅŸÄ±na taÅŸmasÄ±nÄ± Ã¶nle.
+       Dinamik viewport deÃ„Å¸iÃ…Å¸imlerinde lobby'nin
+       ekran dÃ„Â±Ã…Å¸Ã„Â±na taÃ…Å¸masÃ„Â±nÃ„Â± ÃƒÂ¶nle.
     */
     #room-screen {
         max-height: calc(92dvh - 50px);
@@ -1010,7 +1010,7 @@ body {
 
 
 /* =========================================================
-   TELEFON - DÄ°KEY EKRAN
+   TELEFON - DÃ„Â°KEY EKRAN
    ========================================================= */
 
 @media (max-width: 600px) and (orientation: portrait) {
@@ -1021,7 +1021,7 @@ body {
     }
 
     body::before {
-        content: "ğŸ“±";
+        content: "ÄŸÅ¸â€œÂ±";
 
         position: fixed;
 
@@ -1034,7 +1034,7 @@ body {
     }
 
     body::after {
-        content: "LÃ¼tfen telefonunuzu yatay Ã§evirin";
+        content: "LÃƒÂ¼tfen telefonunuzu yatay ÃƒÂ§evirin";
 
         position: fixed;
 
@@ -1055,4 +1055,6 @@ body {
         font-weight: bold;
     }
 }
+
+
 
