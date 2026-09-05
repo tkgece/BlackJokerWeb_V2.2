@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    BOJACK
    LOBBY + 2 PLAYER
    ========================================================= */
@@ -356,7 +356,7 @@ body {
 
 
 /* =========================================================
-   ÜST BİLGİ
+   ÃœST BÄ°LGÄ°
    ========================================================= */
 
 #balance,
@@ -436,7 +436,7 @@ body {
 
 
 /* =========================================================
-   RAKİP - ÜST
+   RAKÄ°P - ÃœST
    ========================================================= */
 
 #opponent-area {
@@ -673,7 +673,7 @@ body {
 
 
 /* =========================================================
-   BAHİS
+   BAHÄ°S
    ========================================================= */
 
 #bet {
@@ -695,7 +695,7 @@ body {
 
 
 /* =========================================================
-   BAHİS ÇİPLERİ
+   BAHÄ°S Ã‡Ä°PLERÄ°
    ========================================================= */
 
 #bet-chips {
@@ -779,7 +779,7 @@ body {
 
 
 /* =========================================================
-   SONUÇ
+   SONUÃ‡
    ========================================================= */
 
 #result {
@@ -865,16 +865,16 @@ body {
 
 
 /* =========================================================
-   MOBİL / TABLET - YATAY
+   MOBÄ°L / TABLET - YATAY
    ========================================================= */
 
 @media (max-width: 900px) and (orientation: landscape) {
 
     /*
-       Oyunu telefon/tablet ekranının tamamına yay.
-       dvw / dvh dinamik viewport ölçülerini kullanır.
-       Fullscreen'e girildiğinde bunlar gerçek fullscreen
-       alanına göre hesaplanır.
+       Oyunu telefon/tablet ekranÄ±nÄ±n tamamÄ±na yay.
+       dvw / dvh dinamik viewport Ã¶lÃ§Ã¼lerini kullanÄ±r.
+       Fullscreen'e girildiÄŸinde bunlar gerÃ§ek fullscreen
+       alanÄ±na gÃ¶re hesaplanÄ±r.
     */
     #game {
         transform:
@@ -886,7 +886,7 @@ body {
 
 
     /* =====================================================
-       MOBİL SES BUTONU
+       MOBÄ°L SES BUTONU
        ===================================================== */
 
     #mobile-music-btn {
@@ -999,8 +999,8 @@ body {
     }
 
     /*
-       Dinamik viewport değişimlerinde lobby'nin
-       ekran dışına taşmasını önle.
+       Dinamik viewport deÄŸiÅŸimlerinde lobby'nin
+       ekran dÄ±ÅŸÄ±na taÅŸmasÄ±nÄ± Ã¶nle.
     */
     #room-screen {
         max-height: calc(92dvh - 50px);
@@ -1010,7 +1010,7 @@ body {
 
 
 /* =========================================================
-   TELEFON - DİKEY EKRAN
+   TELEFON - DÄ°KEY EKRAN
    ========================================================= */
 
 @media (max-width: 600px) and (orientation: portrait) {
@@ -1021,7 +1021,7 @@ body {
     }
 
     body::before {
-        content: "📱";
+        content: "ğŸ“±";
 
         position: fixed;
 
@@ -1034,7 +1034,7 @@ body {
     }
 
     body::after {
-        content: "Lütfen telefonunuzu yatay çevirin";
+        content: "LÃ¼tfen telefonunuzu yatay Ã§evirin";
 
         position: fixed;
 
