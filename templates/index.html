@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 
 <head>
@@ -14,10 +14,10 @@
     <link rel="icon" type="image/png" sizes="512x512"
       href="{{ url_for('static', filename='assets/icon/bojack_favicon.png') }}">
 
-    <!-- Stil dosyası -->
+    <!-- Stil dosyasÄ± -->
     <link
         rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}?v=7e09569"
+        href="{{ url_for('static', filename='css/style.css') }}?v=b8bfe02"
     >
 </head>
 
@@ -29,14 +29,14 @@
         <div id="lobby-title">BOJACK</div>
 
         <div id="nickname-screen">
-            <div class="lobby-label">NİCKİNİ GİR</div>
+            <div class="lobby-label">NÄ°CKÄ°NÄ° GÄ°R</div>
             <input id="nickname-input" type="text" maxlength="16" autocomplete="off" placeholder="Nickname">
             <button id="nickname-continue">DEVAM</button>
         </div>
 
         <div id="menu-screen" style="display:none;">
             <div id="welcome-text"></div>
-            <button id="create-room-btn">ODA OLUŞTUR</button>
+            <button id="create-room-btn">ODA OLUÅTUR</button>
             <button id="join-room-btn">ODAYA KATIL</button>
         </div>
 
@@ -49,23 +49,23 @@
             
             <div id="room-players">
                 <div class="room-player">
-                    🟢 <span id="room-player-1"></span>
+                    ğŸŸ¢ <span id="room-player-1"></span>
                 </div>
                 <div class="room-player waiting" id="room-player-2">
-                    🟡 OYUNCU BEKLENİYOR...
+                    ğŸŸ¡ OYUNCU BEKLENÄ°YOR...
                 </div>
             </div>
 
-            <div id="room-status">🟡 1/2 OYUNCU</div>
+            <div id="room-status">ğŸŸ¡ 1/2 OYUNCU</div>
             <div id="room-info">Oda sahibi sensin</div>
-            <button id="start-game-btn" style="display:none;">OYUNA BAŞLA</button>
+            <button id="start-game-btn" style="display:none;">OYUNA BAÅLA</button>
         </div>
 
         <div id="join-screen" style="display:none;">
-            <div class="lobby-label">ODA KODUNU GİR</div>
-            <input id="room-code-input" type="text" maxlength="5" autocomplete="off" placeholder="Örn. ZVSK0">
+            <div class="lobby-label">ODA KODUNU GÄ°R</div>
+            <input id="room-code-input" type="text" maxlength="5" autocomplete="off" placeholder="Ã–rn. ZVSK0">
             <button id="join-confirm-btn">KATIL</button>
-            <button id="join-back-btn">GERİ</button>
+            <button id="join-back-btn">GERÄ°</button>
         </div>
     </div>
 
@@ -77,11 +77,11 @@
              src="{{ url_for('static', filename='assets/table/masa.png') }}"
              alt="BoJack Table">
 
-        <!-- ÜST BİLGİ -->
-        <div id="balance">BAKİYE: $200</div>
+        <!-- ÃœST BÄ°LGÄ° -->
+        <div id="balance">BAKÄ°YE: $200</div>
         <div id="zero-counter">X 0</div>
-        <div id="music-status">MÜZİK: AÇIK</div>
-        <button id="mobile-music-btn" type="button">🔊</button>
+        <div id="music-status">MÃœZÄ°K: AÃ‡IK</div>
+        <button id="mobile-music-btn" type="button">ğŸ”Š</button>
 
         <!-- OYUNCU 1 -->
         <div id="opponent-area">
@@ -105,8 +105,8 @@
         <button id="stand-btn" class="game-button">STAND</button>
         <button id="hit-btn" class="game-button">HIT</button>
 
-        <!-- BAHİS -->
-        <div id="bet">BAHİS: $0</div>
+        <!-- BAHÄ°S -->
+        <div id="bet">BAHÄ°S: $0</div>
         <div id="bet-chips"></div>
 
         <!-- CHIPLER -->
@@ -118,7 +118,7 @@
             {% endfor %}
         </div>
 
-        <!-- SONUÇ -->
+        <!-- SONUÃ‡ -->
         <div id="result"></div>
 
         <!-- RESTART -->
@@ -128,3 +128,5 @@
     <script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </body>
 </html>
+<script>document.addEventListener("DOMContentLoaded",()=>{const d=document.createElement("div");d.id="viewport-debug";d.style="position:fixed;top:0;left:0;z-index:99999;background:red;color:white;font-size:24px;padding:10px";d.textContent=window.innerWidth+" x "+window.innerHeight;document.body.appendChild(d)});</script>
+
