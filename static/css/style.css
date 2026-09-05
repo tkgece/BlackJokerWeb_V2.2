@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    BOJACK
    LOBBY + 2 PLAYER
    ========================================================= */
@@ -868,7 +868,7 @@ body {
    MOBÄ°L / TABLET - YATAY
    ========================================================= */
 
-@media (orientation: landscape) and (pointer: coarse) {
+@media (orientation: landscape) and (pointer: coarse), (orientation: landscape) and (hover: none) {
 
     /*
        Oyunu telefon/tablet ekranÄ±nÄ±n tamamÄ±na yay.
