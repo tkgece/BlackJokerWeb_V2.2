@@ -2,338 +2,129 @@
 <html lang="tr">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
     <title>BoJack</title>
-    <link rel="icon" type="image/png"
+
+    <!-- Faviconlar -->
+    <link rel="icon" type="image/png" sizes="512x512"
       href="{{ url_for('static', filename='assets/icon/bojack_favicon.png') }}">
 
+    <!-- Stil dosyası -->
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/style.css') }}"
     >
-
 </head>
 
-
 <body>
+    <!-- =====================================================
+         LOBBY
+         ===================================================== -->
+    <div id="lobby">
+        <div id="lobby-title">BOJACK</div>
 
-
-<!-- =====================================================
-     LOBBY
-     ===================================================== -->
-
-<div id="lobby">
-
-    <div id="lobby-title">
-        BOJACK
-    </div>
-
-
-    <div id="nickname-screen">
-
-        <div class="lobby-label">
-            NİCKİNİ GİR
+        <div id="nickname-screen">
+            <div class="lobby-label">NİCKİNİ GİR</div>
+            <input id="nickname-input" type="text" maxlength="16" autocomplete="off" placeholder="Nickname">
+            <button id="nickname-continue">DEVAM</button>
         </div>
 
-        <input
-            id="nickname-input"
-            type="text"
-            maxlength="16"
-            autocomplete="off"
-            placeholder="Nickname"
-        >
-
-        <button id="nickname-continue">
-            DEVAM
-        </button>
-
-    </div>
-
-
-    <div
-        id="menu-screen"
-        style="display:none;"
-    >
-
-        <div id="welcome-text"></div>
-
-        <button id="create-room-btn">
-            ODA OLUŞTUR
-        </button>
-
-        <button id="join-room-btn">
-            ODAYA KATIL
-        </button>
-
-    </div>
-
-
-    <div
-        id="room-screen"
-        style="display:none;"
-    >
-
-        <div id="room-code-title">
-            ODA
+        <div id="menu-screen" style="display:none;">
+            <div id="welcome-text"></div>
+            <button id="create-room-btn">ODA OLUŞTUR</button>
+            <button id="join-room-btn">ODAYA KATIL</button>
         </div>
 
-        <div class="room-code-row">
-            <div id="room-code"></div>
+        <div id="room-screen" style="display:none;">
+            <div id="room-code-title">ODA</div>
+            <div class="room-code-row">
+                <div id="room-code"></div>
+                <button id="copy-room-code-btn" type="button">KOPYALA</button>
+            </div>
+            
+            <div id="room-players">
+                <div class="room-player">
+                    🟢 <span id="room-player-1"></span>
+                </div>
+                <div class="room-player waiting" id="room-player-2">
+                    🟡 OYUNCU BEKLENİYOR...
+                </div>
+            </div>
 
-            <button
-                id="copy-room-code-btn"
-                type="button"
-            >
-                KOPYALA
+            <div id="room-status">🟡 1/2 OYUNCU</div>
+            <div id="room-info">Oda sahibi sensin</div>
+            <button id="start-game-btn" style="display:none;">OYUNA BAŞLA</button>
+        </div>
+
+        <div id="join-screen" style="display:none;">
+            <div class="lobby-label">ODA KODUNU GİR</div>
+            <input id="room-code-input" type="text" maxlength="5" autocomplete="off" placeholder="Örn. ZVSK0">
+            <button id="join-confirm-btn">KATIL</button>
+            <button id="join-back-btn">GERİ</button>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         OYUN
+         ===================================================== -->
+    <div id="game" style="display:none;">
+        <img id="table-bg"
+             src="{{ url_for('static', filename='assets/table/masa.png') }}"
+             alt="BoJack Table">
+
+        <!-- ÜST BİLGİ -->
+        <div id="balance">BAKİYE: $200</div>
+        <div id="zero-counter">X 0</div>
+        <div id="music-status">MÜZİK: AÇIK</div>
+        <button id="mobile-music-btn" type="button">🔊</button>
+
+        <!-- OYUNCU 1 -->
+        <div id="opponent-area">
+            <div id="opponent-title">OYUNCU</div>
+            <div id="opponent-turn">SIRA</div>
+            <div id="opponent-score"></div>
+            <div id="opponent-cards" class="cards"></div>
+        </div>
+
+        <!-- OYUNCU 2 -->
+        <div id="my-area">
+            <div id="my-title">SEN</div>
+            <div id="my-turn">SIRA SENDE</div>
+            <div id="my-score"></div>
+            <div id="my-cards" class="cards"></div>
+        </div>
+
+        <!-- BUTONLAR -->
+        <button id="double-btn" class="game-button">2X</button>
+        <button id="deal-btn" class="game-button">DEAL</button>
+        <button id="stand-btn" class="game-button">STAND</button>
+        <button id="hit-btn" class="game-button">HIT</button>
+
+        <!-- BAHİS -->
+        <div id="bet">BAHİS: $0</div>
+        <div id="bet-chips"></div>
+
+        <!-- CHIPLER -->
+        <div id="chips">
+            {% for value in [1,5,25,50,100,200,500,1000] %}
+            <button class="chip-button" data-value="{{ value }}">
+                <img src="{{ url_for('static', filename='assets/chips/' ~ value ~ '.png') }}" alt="{{ value }}">
             </button>
-        </div>
-        
-        <div id="room-players">
-
-            <div class="room-player">
-                🟢
-                <span id="room-player-1"></span>
-            </div>
-
-            <div
-                class="room-player waiting"
-                id="room-player-2"
-            >
-                🟡 OYUNCU BEKLENİYOR...
-            </div>
-
+            {% endfor %}
         </div>
 
-        <div id="room-status">
-            🟡 1/2 OYUNCU
-        </div>
+        <!-- SONUÇ -->
+        <div id="result"></div>
 
-        <div id="room-info">
-            Oda sahibi sensin
-        </div>
-
-        <button
-            id="start-game-btn"
-            style="display:none;"
-        >
-            OYUNA BAŞLA
-        </button>
-
+        <!-- RESTART -->
+        <button id="restart-btn">RESTART</button>
     </div>
 
-
-    <div
-        id="join-screen"
-        style="display:none;"
-    >
-
-        <div class="lobby-label">
-            ODA KODUNU GİR
-        </div>
-
-        <input
-            id="room-code-input"
-            type="text"
-            maxlength="5"
-            autocomplete="off"
-            placeholder="Örn. ZVSK0"
-        >
-
-        <button id="join-confirm-btn">
-            KATIL
-        </button>
-
-        <button id="join-back-btn">
-            GERİ
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     OYUN
-     ===================================================== -->
-
-<div
-    id="game"
-    style="display:none;"
->
-
-    <img
-        id="table-bg"
-        src="{{ url_for(
-            'static',
-            filename='assets/table/masa.png'
-        ) }}"
-        alt="BoJack Table"
-    >
-
-
-    <!-- ÜST BİLGİ -->
-
-    <div id="balance">
-        BAKİYE: $200
-    </div>
-
-    <div id="zero-counter">
-        X 0
-    </div>
-
-    <div id="music-status">
-        MÜZİK: AÇIK
-    </div>
-
-
-    <!-- =================================================
-         OYUNCU 1 - ÜST
-         ================================================= -->
-
-    <div id="opponent-area">
-
-        <div id="opponent-title">
-            OYUNCU
-        </div>
-
-        <div id="opponent-turn">
-            SIRA
-        </div>
-
-        <div id="opponent-score"></div>
-
-        <div
-            id="opponent-cards"
-            class="cards"
-        ></div>
-
-    </div>
-
-
-    <!-- =================================================
-         OYUNCU 2 - ALT / BEN
-         ================================================= -->
-
-    <div id="my-area">
-
-        <div id="my-title">
-            SEN
-        </div>
-
-        <div id="my-turn">
-            SIRA SENDE
-        </div>
-
-        <div id="my-score"></div>
-
-        <div
-            id="my-cards"
-            class="cards"
-        ></div>
-
-    </div>
-
-
-    <!-- =================================================
-         BUTONLAR
-         ================================================= -->
-
-    <button
-        id="double-btn"
-        class="game-button"
-    >
-        2X
-    </button>
-
-    <button
-        id="deal-btn"
-        class="game-button"
-    >
-        DEAL
-    </button>
-
-    <button
-        id="stand-btn"
-        class="game-button"
-    >
-        STAND
-    </button>
-
-    <button
-        id="hit-btn"
-        class="game-button"
-    >
-        HIT
-    </button>
-
-
-    <!-- BAHİS -->
-
-    <div id="bet">
-        BAHİS: $0
-    </div>
-
-
-    <!-- BAHİS ÇİPLERİ -->
-
-    <div id="bet-chips"></div>
-
-
-    <!-- CHIPLER -->
-
-    <div id="chips">
-
-        {% for value in [1,5,25,50,100,200,500,1000] %}
-
-        <button
-            class="chip-button"
-            data-value="{{ value }}"
-        >
-
-            <img
-                src="{{ url_for(
-                    'static',
-                    filename='assets/chips/' ~ value ~ '.png'
-                ) }}"
-                alt="{{ value }}"
-            >
-
-        </button>
-
-        {% endfor %}
-
-    </div>
-
-
-    <!-- SONUÇ -->
-
-    <div id="result"></div>
-
-
-    <!-- RESTART -->
-
-    <button id="restart-btn">
-        RESTART
-    </button>
-
-</div>
-
-
-<script
-    src="{{ url_for(
-        'static',
-        filename='js/game.js'
-    ) }}"
-></script>
-
-
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </body>
-
 </html>

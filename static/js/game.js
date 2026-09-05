@@ -1156,6 +1156,25 @@ function renderInfo() {
                 : "rgb(180,180,180)";
     }
 
+    const mobileMusicButton =
+    document.getElementById(
+        "mobile-music-btn"
+    );
+
+if (mobileMusicButton) {
+
+    mobileMusicButton.textContent =
+        game.musicEnabled
+            ? "🔊"
+            : "🔇";
+
+    mobileMusicButton.setAttribute(
+        "aria-label",
+        game.musicEnabled
+            ? "Müziği kapat"
+            : "Müziği aç"
+    );
+}
     /*
        Eski zero counter artık kullanılmıyor.
        Varsa hedef bilgisini gösteriyoruz.
@@ -2198,6 +2217,29 @@ document.addEventListener(
     }
 );
 
+/* =========================================================
+   MOBİL MÜZİK BUTONU
+   ========================================================= */
+
+const mobileMusicBtn =
+    document.getElementById(
+        "mobile-music-btn"
+    );
+
+if (mobileMusicBtn) {
+
+    mobileMusicBtn.addEventListener(
+        "click",
+        () => {
+
+            if (!lobby.inGame) {
+                return;
+            }
+
+            toggleMusic();
+        }
+    );
+}
 
 /* =========================================================
    F11
