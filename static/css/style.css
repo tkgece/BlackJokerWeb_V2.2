@@ -878,8 +878,8 @@ body {
     */
     #game {
         transform:
-            scaleX(calc(100dvw / 1280))
-            scaleY(calc(100dvh / 720));
+            scaleX(calc(100dvw / 1280 * 0.40))
+            scaleY(calc(100dvh / 720 * 0.40));
 
         transform-origin: center center;
     }
